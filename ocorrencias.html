@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ocorrências — CECM Profa. Maria Helena</title>
+  <link rel="stylesheet" href="ocorrencia.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.7.0/dist/tabler-icons.min.css" />
+  <script src="auth.js"></script>
+  <style>
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: 16px;
+    }
+    .filter-bar select, .filter-bar input {
+      padding: 6px 10px;
+      border: 1px solid var(--border-hover);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      outline: none;
+    }
+    .filter-bar select:focus, .filter-bar input:focus { border-color: var(--azul-claro); }
+    .filter-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); align-self: center; }
+    .detalhe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .detalhe-item label { font-size: 11px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 3px; }
+    .detalhe-item span { font-size: 13.5px; color: var(--text-primary); }
+    .detalhe-desc { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 13px; line-height: 1.7; color: var(--text-primary); }
+    .section-sep { font-size: 11.5px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); padding-bottom: 6px; margin: 16px 0 12px; }
+    .status-select { padding: 6px 10px; border: 1px solid var(--border-hover); border-radius: var(--radius-sm); font-size: 13px; background: var(--bg-secondary); color: var(--text-primary); outline: none; }
+    .pagination { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-top: 1px solid var(--border); font-size: 12.5px; color: var(--text-secondary); }
+    .pagination-btns { display: flex; gap: 4px; }
+    .page-btn { padding: 5px 10px; border: 1px solid var(--border-hover); border-radius: var(--radius-sm); background: var(--bg-card); font-size: 12px; cursor: pointer; color: var(--text-primary); }
+    .page-btn.active { background: var(--azul-escuro); color: #fff; border-color: var(--azul-escuro); }
+  </style>
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="escola">Colégio Estadual Cívico Militar<br>Profa. Maria Helena Teixeira Luciano</div>
+      <div class="sistema">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        Registro de Ocorrências
+      </div>
+    </div>
+    <nav class="sidebar-nav" aria-label="Menu principal">
+      <div class="nav-section">Principal</div>
+      <a href="ocorrencias.html" class="nav-item"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Painel</a>
+      <a href="nova-ocorrencia.html" class="nav-item"><i class="ti ti-plus" aria-hidden="true"></i> Nova ocorrência</a>
+      <a href="ocorrencias.html" class="nav-item active" aria-current="page"><i class="ti ti-list" aria-hidden="true"></i> Todas as ocorrências</a>
+      <div class="nav-section">Gestão</div>
+      <a href="gestao-ocorrencias.html" class="nav-item"><i class="ti ti-users" aria-hidden="true"></i> Alunos</a>
+      <a href="gestao-ocorrencias.html" class="nav-item"><i class="ti ti-chart-bar" aria-hidden="true"></i> Relatórios</a>
+      <a href="gestao-ocorrencias.html" class="nav-item"><i class="ti ti-settings" aria-hidden="true"></i> Configurações</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar" aria-hidden="true">DG</div>
+      <div class="user-info">
+        <div class="user-name">Dir. Gestão</div>
+        <div class="user-role">Administrador</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="topbar-title">Todas as ocorrências</div>
+        <div class="topbar-breadcrumb">47 registros encontrados</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn">
+          <i class="ti ti-download" style="font-size:15px" aria-hidden="true"></i> Exportar
+        </button>
+        <a href="nova-ocorrencia.html" class="btn btn-primary">
+          <i class="ti ti-plus" style="font-size:15px" aria-hidden="true"></i> Nova ocorrência
+        </a>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="filter-bar">
+        <span class="filter-label">Filtros:</span>
+        <input type="search" placeholder="Buscar aluno ou RA…" style="width:190px" aria-label="Buscar" />
+        <select aria-label="Turma">
+          <option value="">Todas as turmas</option>
+          <option>1º A</option><option>1º B</option><option>1º C</option>
+          <option>2º A</option><option>2º B</option><option>2º C</option>
+          <option>3º A</option><option>3º B</option><option>3º C</option>
+        </select>
+        <select aria-label="Gravidade">
+          <option value="">Qualquer gravidade</option>
+          <option>Leve</option><option>Média</option><option>Grave</option>
+        </select>
+        <select aria-label="Status">
+          <option value="">Todos os status</option>
+          <option>Pendente</option><option>Em análise</option><option>Resolvida</option>
+        </select>
+        <input type="date" aria-label="Data inicial" />
+        <input type="date" aria-label="Data final" />
+        <button class="btn btn-sm">Aplicar</button>
+        <button class="btn btn-sm" style="color:var(--text-muted)">Limpar</button>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table id="tabela-ocorrencias">
+            <thead>
+              <tr>
+                <th scope="col">Protocolo</th>
+                <th scope="col">Aluno</th>
+                <th scope="col">Turma</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Gravidade</th>
+                <th scope="col">Registrado por</th>
+                <th scope="col">Data</th>
+                <th scope="col">Status</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-ocorrencias"></tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <span id="pag-info">Mostrando 1–10 de 47</span>
+          <div class="pagination-btns">
+            <button class="page-btn">‹</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">5</button>
+            <button class="page-btn">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-titulo">Ocorrência #0047</span>
+      <button class="modal-close" id="btn-fechar-modal" aria-label="Fechar">
+        <i class="ti ti-x" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body" id="modal-corpo"></div>
+  </div>
+</div>
+
+<script>
+  const ocorrencias = [
+    { id:'0047', aluno:'Lucas Ferreira',   ra:'1234567-8', turma:'2º B', tipo:'Indisciplina',           grav:'grave', registrado:'Prof. Carlos',   data:'12/06/2026', status:'pendente',  local:'Sala de aula',  descricao:'Aluno perturbou a aula repetidamente após diversas advertências verbais.', providencia:'Advertência verbal', responsavel:'Coordenação' },
+    { id:'0046', aluno:'Ana Souza',        ra:'2345678-9', turma:'3º A', tipo:'Atraso reiterado',       grav:'media', registrado:'Prof. Marina',    data:'11/06/2026', status:'analise',   local:'Portaria',      descricao:'Aluna chegou com mais de 20 minutos de atraso pelo quinto dia consecutivo.', providencia:'Contato com responsáveis', responsavel:'Secretaria' },
+    { id:'0045', aluno:'Pedro Alves',      ra:'3456789-0', turma:'1º C', tipo:'Uso de celular',         grav:'leve',  registrado:'Prof. Roberta',   data:'10/06/2026', status:'resolvida', local:'Sala de aula',  descricao:'Aluno usou o celular durante a aula de matemática.', providencia:'Advertência verbal', responsavel:'—' },
+    { id:'0044', aluno:'Mariana Costa',    ra:'4567890-1', turma:'2º A', tipo:'Conflito entre alunos',  grav:'grave', registrado:'Prof. Eduardo',   data:'09/06/2026', status:'resolvida', local:'Pátio',         descricao:'Briga verbal entre a aluna e uma colega durante o intervalo.', providencia:'Encaminhamento à direção', responsavel:'Direção' },
+    { id:'0043', aluno:'Rafael Lima',      ra:'5678901-2', turma:'3º B', tipo:'Falta injustificada',    grav:'media', registrado:'Prof. Luciana',   data:'08/06/2026', status:'pendente',  local:'—',             descricao:'Aluno esteve ausente sem apresentar justificativa ou atestado.', providencia:'Nenhuma — aguardando análise', responsavel:'Secretaria' },
+    { id:'0042', aluno:'Camila Rocha',     ra:'6789012-3', turma:'1º A', tipo:'Desrespeito ao docente', grav:'grave', registrado:'Prof. Anderson',  data:'07/06/2026', status:'analise',   local:'Sala de aula',  descricao:'Aluna respondeu de forma desrespeitosa ao docente na frente da turma.', providencia:'Advertência escrita', responsavel:'Coordenação' },
+    { id:'0041', aluno:'Bruno Nascimento', ra:'7890123-4', turma:'2º C', tipo:'Dano ao patrimônio',     grav:'grave', registrado:'Inspetor João',   data:'06/06/2026', status:'resolvida', local:'Banheiro',      descricao:'Aluno danificou a fechadura do banheiro masculino.', providencia:'Suspensão', responsavel:'Direção' },
+    { id:'0040', aluno:'Fernanda Dias',    ra:'8901234-5', turma:'3º C', tipo:'Bullying',               grav:'grave', registrado:'Prof. Patrícia',  data:'05/06/2026', status:'analise',   local:'Corredor',      descricao:'Relatado comportamento de bullying por parte da aluna contra colega de turma.', providencia:'Encaminhamento à direção', responsavel:'Direção' },
+    { id:'0039', aluno:'Henrique Moraes',  ra:'9012345-6', turma:'1º B', tipo:'Uso de celular',         grav:'leve',  registrado:'Prof. Sandra',    data:'04/06/2026', status:'resolvida', local:'Sala de aula',  descricao:'Celular confiscado durante avaliação.', providencia:'Advertência verbal', responsavel:'—' },
+    { id:'0038', aluno:'Isabela Torres',   ra:'0123456-7', turma:'2º B', tipo:'Atraso reiterado',       grav:'media', registrado:'Prof. Carlos',    data:'03/06/2026', status:'resolvida', local:'Portaria',      descricao:'Terceiro atraso do mês. Responsáveis foram contatados.', providencia:'Contato com responsáveis', responsavel:'Secretaria' },
+  ];
+
+  const gravMap   = { grave:{label:'Grave',cls:'badge-grave',dot:'dot-grave'}, media:{label:'Média',cls:'badge-media',dot:'dot-media'}, leve:{label:'Leve',cls:'badge-leve',dot:'dot-leve'} };
+  const statusMap = { pendente:{label:'Pendente',cls:'badge-media'}, analise:{label:'Em análise',cls:'badge-info'}, resolvida:{label:'Resolvida',cls:'badge-leve'} };
+
+  function renderTabela() {
+    document.getElementById('lista-ocorrencias').innerHTML = ocorrencias.map(o => {
+      const g = gravMap[o.grav], s = statusMap[o.status];
+      return `<tr>
+        <td><span class="protocolo">#${o.id}</span></td>
+        <td class="font-medium">${o.aluno}</td>
+        <td class="text-muted">${o.turma}</td>
+        <td>${o.tipo}</td>
+        <td><span class="dot ${g.dot}"></span>${g.label}</td>
+        <td class="text-muted">${o.registrado}</td>
+        <td class="text-muted">${o.data}</td>
+        <td><span class="pill ${s.cls}">${s.label}</span></td>
+        <td><button class="btn btn-sm text-link" onclick="abrirModal('${o.id}')" style="border:none;background:none;padding:0;color:var(--azul-claro)"><i class="ti ti-eye" style="font-size:15px"></i> Ver</button></td>
+      </tr>`;
+    }).join('');
+  }
+
+  function abrirModal(id) {
+    const o = ocorrencias.find(x => x.id === id);
+    if (!o) return;
+    const g = gravMap[o.grav], s = statusMap[o.status];
+    document.getElementById('modal-titulo').textContent = `Ocorrência #${o.id}`;
+    document.getElementById('modal-corpo').innerHTML = `
+      <div class="detalhe-grid">
+        <div class="detalhe-item"><label>Aluno</label><span class="font-medium">${o.aluno}</span></div>
+        <div class="detalhe-item"><label>RA</label><span>${o.ra}</span></div>
+        <div class="detalhe-item"><label>Turma</label><span>${o.turma}</span></div>
+        <div class="detalhe-item"><label>Data</label><span>${o.data}</span></div>
+        <div class="detalhe-item"><label>Tipo</label><span>${o.tipo}</span></div>
+        <div class="detalhe-item"><label>Local</label><span>${o.local}</span></div>
+        <div class="detalhe-item"><label>Gravidade</label><span class="pill ${g.cls}">${g.label}</span></div>
+        <div class="detalhe-item"><label>Registrado por</label><span>${o.registrado}</span></div>
+      </div>
+      <div class="section-sep">Descrição</div>
+      <div class="detalhe-desc">${o.descricao}</div>
+      <div class="section-sep">Providências</div>
+      <div class="detalhe-grid">
+        <div class="detalhe-item"><label>Providência tomada</label><span>${o.providencia}</span></div>
+        <div class="detalhe-item"><label>Responsável</label><span>${o.responsavel}</span></div>
+      </div>
+      <div class="section-sep">Status atual</div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="pill ${s.cls}">${s.label}</span>
+        <select class="status-select">
+          <option ${o.status==='pendente'?'selected':''}>Pendente</option>
+          <option ${o.status==='analise'?'selected':''}>Em análise</option>
+          <option ${o.status==='resolvida'?'selected':''}>Resolvida</option>
+        </select>
+        <button class="btn btn-primary btn-sm" onclick="alert('Status atualizado!\\n(Back-end pendente)')">Salvar</button>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:20px;gap:8px;">
+        <button class="btn" onclick="fecharModal()">Fechar</button>
+        <button class="btn" onclick="window.print()"><i class="ti ti-printer" style="font-size:14px"></i> Imprimir</button>
+      </div>`;
+    document.getElementById('modal-overlay').classList.add('open');
+    document.getElementById('btn-fechar-modal').focus();
+  }
+
+  function fecharModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+  document.getElementById('btn-fechar-modal').addEventListener('click', fecharModal);
+  document.getElementById('modal-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) fecharModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharModal(); });
+
+  renderTabela();
+</script>
+</body>
+</html>
