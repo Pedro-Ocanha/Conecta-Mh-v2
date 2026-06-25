@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova Ocorrência — CECM Profa. Maria Helena</title>
+  <link rel="stylesheet" href="styles/ocorrencia.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.7.0/dist/tabler-icons.min.css" />
+  <script src="scripts/auth.js"></script>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ==================== SIDEBAR ==================== -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="escola">Colégio Estadual Cívico Militar<br>Profa. Maria Helena Teixeira Luciano</div>
+      <div class="sistema">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        Registro de Ocorrências
+      </div>
+    </div>
+    <nav class="sidebar-nav" aria-label="Menu principal">
+      <div class="nav-section">Principal</div>
+      <a href="ocorrencias.html" class="nav-item">
+        <i class="ti ti-layout-dashboard" aria-hidden="true"></i> Painel
+      </a>
+      <a href="nova-ocorrencia.html" class="nav-item active" aria-current="page">
+        <i class="ti ti-plus" aria-hidden="true"></i> Nova ocorrência
+      </a>
+      <a href="ocorrencias.html" class="nav-item">
+        <i class="ti ti-list" aria-hidden="true"></i> Todas as ocorrências
+      </a>
+      <div class="nav-section">Gestão</div>
+      <a href="gestao-ocorrencias.html" class="nav-item"><i class="ti ti-users" aria-hidden="true"></i> Alunos</a>
+      <a href="gestao-ocorrencias.html" class="nav-item"><i class="ti ti-chart-bar" aria-hidden="true"></i> Relatórios</a>
+      <a href="gestao-ocorrencias.html" class="nav-item"><i class="ti ti-settings" aria-hidden="true"></i> Configurações</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar" aria-hidden="true">DG</div>
+      <div class="user-info">
+        <div class="user-name">Dir. Gestão</div>
+        <div class="user-role">Administrador</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== MAIN ==================== -->
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="topbar-title">Nova ocorrência</div>
+        <div class="topbar-breadcrumb">
+          <a href="ocorrencias.html" style="color:var(--text-muted)">Painel</a>
+          &nbsp;/&nbsp; Registrar ocorrência
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <a href="ocorrencias.html" class="btn">Cancelar</a>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <form id="form-ocorrencia" novalidate>
+
+        <!-- Dados do aluno -->
+        <div class="card mb-20">
+          <div class="card-header">
+            <span class="card-title">
+              <i class="ti ti-user" style="font-size:15px; vertical-align:-2px; margin-right:6px; color:var(--azul-claro)" aria-hidden="true"></i>
+              Dados do aluno
+            </span>
+          </div>
+          <div class="card-body">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="aluno-nome">
+                  Nome completo <span class="required" aria-label="obrigatório">*</span>
+                </label>
+                <input class="form-input" type="text" id="aluno-nome" name="aluno_nome"
+                  placeholder="Ex: Lucas Ferreira" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="aluno-ra">RA do aluno</label>
+                <input class="form-input" type="text" id="aluno-ra" name="aluno_ra"
+                  placeholder="Ex: 1234567-8" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="turma">
+                  Turma <span class="required" aria-label="obrigatório">*</span>
+                </label>
+                <select class="form-select" id="turma" name="turma" required>
+                  <option value="">Selecione a turma</option>
+                  <optgroup label="1º Ano">
+                    <option>1º A</option><option>1º B</option><option>1º C</option>
+                  </optgroup>
+                  <optgroup label="2º Ano">
+                    <option>2º A</option><option>2º B</option><option>2º C</option>
+                  </optgroup>
+                  <optgroup label="3º Ano">
+                    <option>3º A</option><option>3º B</option><option>3º C</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="turno">Turno</label>
+                <select class="form-select" id="turno" name="turno">
+                  <option value="">Selecione o turno</option>
+                  <option>Matutino</option>
+                  <option>Vespertino</option>
+                  <option>Noturno</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dados da ocorrência -->
+        <div class="card mb-20">
+          <div class="card-header">
+            <span class="card-title">
+              <i class="ti ti-alert-triangle" style="font-size:15px; vertical-align:-2px; margin-right:6px; color:var(--azul-claro)" aria-hidden="true"></i>
+              Dados da ocorrência
+            </span>
+          </div>
+          <div class="card-body">
+            <div class="form-grid cols-3">
+              <div class="form-group">
+                <label class="form-label" for="data">
+                  Data <span class="required" aria-label="obrigatório">*</span>
+                </label>
+                <input class="form-input" type="date" id="data" name="data" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="hora">Hora</label>
+                <input class="form-input" type="time" id="hora" name="hora" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="local">Local</label>
+                <select class="form-select" id="local" name="local">
+                  <option value="">Selecione o local</option>
+                  <option>Sala de aula</option><option>Pátio</option>
+                  <option>Corredor</option><option>Quadra esportiva</option>
+                  <option>Refeitório</option><option>Banheiro</option>
+                  <option>Portaria</option><option>Outro</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="tipo">
+                  Tipo de ocorrência <span class="required" aria-label="obrigatório">*</span>
+                </label>
+                <select class="form-select" id="tipo" name="tipo" required>
+                  <option value="">Selecione o tipo</option>
+                  <optgroup label="Comportamento">
+                    <option>Indisciplina</option>
+                    <option>Desrespeito ao docente</option>
+                    <option>Conflito entre alunos</option>
+                    <option>Bullying</option>
+                    <option>Agressão física</option>
+                  </optgroup>
+                  <optgroup label="Frequência">
+                    <option>Atraso reiterado</option>
+                    <option>Falta injustificada</option>
+                  </optgroup>
+                  <optgroup label="Normas">
+                    <option>Uso de celular em aula</option>
+                    <option>Uso de uniforme incorreto</option>
+                    <option>Dano ao patrimônio</option>
+                  </optgroup>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="gravidade">
+                  Gravidade <span class="required" aria-label="obrigatório">*</span>
+                </label>
+                <select class="form-select" id="gravidade" name="gravidade" required>
+                  <option value="">Selecione</option>
+                  <option value="leve">Leve</option>
+                  <option value="media">Média</option>
+                  <option value="grave">Grave</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="professor">Registrado por</label>
+                <input class="form-input" type="text" id="professor" name="professor"
+                  placeholder="Nome do professor / servidor" />
+              </div>
+              <div class="form-group form-full">
+                <label class="form-label" for="descricao">
+                  Descrição da ocorrência <span class="required" aria-label="obrigatório">*</span>
+                </label>
+                <textarea class="form-textarea" id="descricao" name="descricao"
+                  placeholder="Descreva detalhadamente o que aconteceu…" rows="5" required></textarea>
+                <span class="form-hint">Seja objetivo e factual. Evite julgamentos.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Providências -->
+        <div class="card mb-20">
+          <div class="card-header">
+            <span class="card-title">
+              <i class="ti ti-clipboard-check" style="font-size:15px; vertical-align:-2px; margin-right:6px; color:var(--azul-claro)" aria-hidden="true"></i>
+              Providências tomadas
+            </span>
+          </div>
+          <div class="card-body">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="providencia">Providência imediata</label>
+                <select class="form-select" id="providencia" name="providencia">
+                  <option value="">Selecione</option>
+                  <option>Advertência verbal</option>
+                  <option>Advertência escrita</option>
+                  <option>Encaminhamento à direção</option>
+                  <option>Contato com os pais / responsáveis</option>
+                  <option>Suspensão</option>
+                  <option>Nenhuma — aguardando análise</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="responsavel-acompanhamento">Responsável pelo acompanhamento</label>
+                <input class="form-input" type="text" id="responsavel-acompanhamento"
+                  name="responsavel_acompanhamento" placeholder="Nome do responsável" />
+              </div>
+              <div class="form-group form-full">
+                <label class="form-label" for="obs-providencia">Observações adicionais</label>
+                <textarea class="form-textarea" id="obs-providencia" name="obs_providencia"
+                  placeholder="Informações sobre contato com família, encaminhamentos, etc." rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ações do formulário -->
+        <div class="form-actions">
+          <a href="index.html" class="btn">Cancelar</a>
+          <button type="submit" class="btn btn-primary">
+            <i class="ti ti-device-floppy" style="font-size:15px" aria-hidden="true"></i>
+            Salvar ocorrência
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </main>
+</div>
+
+<script>
+  document.getElementById('data').valueAsDate = new Date();
+
+  // Preenche o campo "Registrado por" com o usuário logado
+  document.addEventListener('DOMContentLoaded', function () {
+    const u = window.usuarioLogado;
+    if (u) document.getElementById('professor').value = u.nome;
+  });
+
+  document.getElementById('form-ocorrencia').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!this.checkValidity()) { this.reportValidity(); return; }
+    alert('Ocorrência registrada com sucesso!\n(Integração com back-end pendente)');
+    window.location.href = 'index.html';
+  });
+</script>
+</body>
+</html>
