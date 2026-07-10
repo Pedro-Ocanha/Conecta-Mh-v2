@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel — CECM Profa. Maria Helena</title>
+  <link rel="stylesheet" href="styles/ocorrencia.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.7.0/dist/tabler-icons.min.css" />
+  <link rel="shortcut icon" href="img/brasao_colegio.webp" type="image/x-icon">
+  <script src="auth.js"></script>
+ 
+</head>
+<body>
+ 
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="escola">Colégio Estadual Cívico Militar<br>Profa. Maria Helena Teixeira Luciano</div>
+      <div class="sistema">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        Registro de Ocorrências
+      </div>
+    </div>
+    
+    <nav class="sidebar-nav" aria-label="Menu principal">
+    <a href="home.html" class="nav-item"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Home</a>
+      <div class="nav-section">Principal</div>
+      <a href="painel.html" class="nav-item active" aria-current="page"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Painel</a>
+      <a href="nova-ocorrencia.html" class="nav-item"><i class="ti ti-plus" aria-hidden="true"></i> Nova ocorrência</a>
+      <a href="ocorrencias.html" class="nav-item"><i class="ti ti-list" aria-hidden="true"></i> Todas as ocorrências</a>
+      <div class="nav-section">Gestão</div>
+      <a href="gestao-ocorrencias.html" class="nav-item"><i class="ti ti-users" aria-hidden="true"></i> Alunos</a>
+      <a href="gestao-ocorrencias.html" class="nav-item"><i class="ti ti-chart-bar" aria-hidden="true"></i> Relatórios</a>
+      <a href="gestao-ocorrencias.html" class="nav-item"><i class="ti ti-settings" aria-hidden="true"></i> Configurações</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar" aria-hidden="true">DG</div>
+      <div class="user-info">
+        <div class="user-name">Dir. Gestão</div>
+        <div class="user-role">Administrador</div>
+      </div>
+    </div>
+  </aside>
+ 
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="topbar-title">Painel</div>
+        <div class="topbar-breadcrumb">Visão geral — junho 2026</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn">
+          <i class="ti ti-download" style="font-size:15px" aria-hidden="true"></i> Exportar
+        </button>
+        <a href="nova-ocorrencia.html" class="btn btn-primary">
+          <i class="ti ti-plus" style="font-size:15px" aria-hidden="true"></i> Nova ocorrência
+        </a>
+      </div>
+    </header>
+ 
+    <div class="page-content">
+ 
+      <!-- ── Cards de métricas ── -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total este mês</div>
+          <div class="stat-value">47</div>
+          <span class="stat-badge badge-neutro">8 a mais que maio</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pendentes</div>
+          <div class="stat-value" style="color:var(--status-media-text)">8</div>
+          <span class="stat-badge badge-media">17% do total</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Em análise</div>
+          <div class="stat-value" style="color:var(--status-info-text)">11</div>
+          <span class="stat-badge badge-info">23,4% do total</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Resolvidas</div>
+          <div class="stat-value" style="color:var(--status-leve-text)">28</div>
+          <span class="stat-badge badge-leve">59,6% do total</span>
+        </div>
+      </div>
+ 
+      <!-- ── Alertas ── -->
+      <div class="alert-card" id="alert-card">
+        <div class="alert-header">
+          <i class="ti ti-alert-triangle" style="font-size:16px"></i>
+          <span id="alert-title">Ocorrências graves pendentes</span>
+        </div>
+        <div id="alert-list"></div>
+      </div>
+ 
+      <!-- ── Gráficos ── -->
+      <div class="two-col">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Ocorrências por gravidade</div>
+            <span style="font-size:11px;color:var(--text-muted)">junho 2026</span>
+          </div>
+          <div class="chart-bar-wrap">
+            <div class="bar-row"><div class="bar-label">Grave</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--status-grave-dot)">5</div></div></div>
+            <div class="bar-row"><div class="bar-label">Média</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:var(--status-media-dot)">3</div></div></div>
+            <div class="bar-row"><div class="bar-label">Leve</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:var(--status-leve-dot)">2</div></div></div>
+          </div>
+        </div>
+ 
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Ocorrências por turma</div>
+            <span style="font-size:11px;color:var(--text-muted)">junho 2026</span>
+          </div>
+          <div class="chart-bar-wrap">
+            <div class="bar-row"><div class="bar-label">2º B</div><div class="bar-track"><div class="bar-fill" style="width:85%;background:var(--status-grave-dot)">12</div></div></div>
+            <div class="bar-row"><div class="bar-label">3º A</div><div class="bar-track"><div class="bar-fill" style="width:64%;background:var(--status-media-dot)">9</div></div></div>
+            <div class="bar-row"><div class="bar-label">1º C</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--status-media-dot)">7</div></div></div>
+            <div class="bar-row"><div class="bar-label">2º A</div><div class="bar-track"><div class="bar-fill" style="width:43%;background:var(--azul-claro)">6</div></div></div>
+            <div class="bar-row"><div class="bar-label">3º B</div><div class="bar-track"><div class="bar-fill" style="width:36%;background:var(--azul-claro)">5</div></div></div>
+            <div class="bar-row"><div class="bar-label">1º A</div><div class="bar-track"><div class="bar-fill" style="width:29%;background:var(--azul-escuro)">4</div></div></div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- ── Últimas ocorrências ── -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Últimas ocorrências</div>
+          <a href="ocorrencias.html" class="text-link" style="font-size:12.5px">Ver todas →</a>
+        </div>
+        <div class="recent-list" id="recent-list"></div>
+      </div>
+ 
+    </div>
+  </main>
+</div>
+ 
+<script>
+  const ocorrencias = [
+    { id:'0047', aluno:'Lucas Ferreira',   turma:'2º B', tipo:'Indisciplina',           grav:'grave', registrado:'Prof. Carlos',   data:'12/06/2026', status:'pendente'  },
+    { id:'0046', aluno:'Ana Souza',        turma:'3º A', tipo:'Atraso reiterado',       grav:'media', registrado:'Prof. Marina',    data:'11/06/2026', status:'analise'   },
+    { id:'0045', aluno:'Pedro Alves',      turma:'1º C', tipo:'Uso de celular',         grav:'leve',  registrado:'Prof. Roberta',   data:'10/06/2026', status:'resolvida' },
+    { id:'0044', aluno:'Mariana Costa',    turma:'2º A', tipo:'Conflito entre alunos',  grav:'grave', registrado:'Prof. Eduardo',   data:'09/06/2026', status:'resolvida' },
+    { id:'0043', aluno:'Rafael Lima',      turma:'3º B', tipo:'Falta injustificada',    grav:'media', registrado:'Prof. Luciana',   data:'08/06/2026', status:'pendente'  },
+    { id:'0042', aluno:'Camila Rocha',     turma:'1º A', tipo:'Desrespeito ao docente', grav:'grave', registrado:'Prof. Anderson',  data:'07/06/2026', status:'analise'   },
+    { id:'0041', aluno:'Bruno Nascimento', turma:'2º C', tipo:'Dano ao patrimônio',     grav:'grave', registrado:'Inspetor João',   data:'06/06/2026', status:'resolvida' },
+    { id:'0040', aluno:'Fernanda Dias',    turma:'3º C', tipo:'Bullying',               grav:'grave', registrado:'Prof. Patrícia',  data:'05/06/2026', status:'analise'   },
+    { id:'0039', aluno:'Henrique Moraes',  turma:'1º B', tipo:'Uso de celular',         grav:'leve',  registrado:'Prof. Sandra',    data:'04/06/2026', status:'resolvida' },
+    { id:'0038', aluno:'Isabela Torres',   turma:'2º B', tipo:'Atraso reiterado',       grav:'media', registrado:'Prof. Carlos',    data:'03/06/2026', status:'resolvida' },
+  ];
+ 
+  const gravMap   = { grave:{label:'Grave',dot:'dot-grave'}, media:{label:'Média',dot:'dot-media'}, leve:{label:'Leve',dot:'dot-leve'} };
+  const statusMap = { pendente:{label:'Pendente',cls:'badge-media'}, analise:{label:'Em análise',cls:'badge-info'}, resolvida:{label:'Resolvida',cls:'badge-leve'} };
+ 
+  // ── Alertas: graves + pendentes ──
+  function renderAlertas() {
+    const graves = ocorrencias.filter(o => o.grav === 'grave' && o.status === 'pendente');
+    const list = document.getElementById('alert-list');
+    const title = document.getElementById('alert-title');
+ 
+    if (graves.length === 0) {
+      title.textContent = 'Nenhuma ocorrência grave pendente';
+      list.innerHTML = `<div class="alert-empty">Tudo em dia por aqui 👍</div>`;
+      document.getElementById('alert-card').style.background = 'var(--status-leve-bg)';
+      document.getElementById('alert-card').style.borderColor = '#bbf7d0';
+      title.style.color = 'var(--status-leve-text)';
+      return;
+    }
+ 
+    title.textContent = `${graves.length} ocorrência(s) grave(s) pendente(s) de análise`;
+    list.innerHTML = graves.map(o => `
+      <div class="alert-item">
+        <div class="alert-item-left">
+          <span class="dot ${gravMap[o.grav].dot}"></span>
+          <strong>#${o.id}</strong> — ${o.aluno} (${o.turma})
+        </div>
+        <a href="ocorrencias.html" class="text-link" style="font-size:11.5px">Ver →</a>
+      </div>
+    `).join('');
+  }
+ 
+  // ── Últimas 5 ocorrências ──
+  function renderRecentes() {
+    const recentes = ocorrencias.slice(0, 5);
+    document.getElementById('recent-list').innerHTML = recentes.map(o => {
+      const g = gravMap[o.grav], s = statusMap[o.status];
+      return `
+        <div class="recent-row">
+          <div class="recent-left">
+            <span class="dot ${g.dot}"></span>
+            <div class="recent-info">
+              <div class="recent-aluno">${o.aluno} <span class="recent-proto">#${o.id}</span></div>
+              <div class="recent-meta">${o.tipo} · ${o.turma} · ${o.data}</div>
+            </div>
+          </div>
+          <div class="recent-right">
+            <span class="pill ${s.cls}">${s.label}</span>
+          </div>
+        </div>`;
+    }).join('');
+  }
+ 
+  renderAlertas();
+  renderRecentes();
+</script>
+</body>
+</html>
+ 
